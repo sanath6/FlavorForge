@@ -69,3 +69,18 @@ export default {
 @tailwind components;
 @tailwind utilities;
 
+## Folder structure creation  and  features addition
+Components
+Pages
+Services -- basic url general
+
+## Addition of code and readme file steps
+## Initailazation of react-router and axios 
+npm install react-router-dom
+npm install axios
+
+## Favourites page
+Given an favouirte button to list any item and given an page to list and remove if not required
+
+## Intallization of react icons for icons for UI
+npm install react-icons
