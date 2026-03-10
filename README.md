@@ -79,8 +79,23 @@ Services -- basic url general
 npm install react-router-dom
 npm install axios
 
-## Favourites page
-Given an favouirte button to list any item and given an page to list and remove if not required
+## Favorites page
+Given an favorites button to list any item and given an page to list and remove if not required
 
 ## Intallization of react icons for icons for UI
 npm install react-icons
+
+## Implemented country search and component 
+Implemnted country wise search and display recipes according to country search
+
+## Feature
+I have add an feature to select all  or indivisual recipe to remove from favorites from your bucket list.
+Remove button appears atomaticaally when u select any one of recipe and it shows count on right side 
+
+## Addition of Country Flags 
+I have added flags for Api list and render according to flag code where the code are seperatly in Country flags.jsx file under Services Folder
+Implmented a some userexperience features
+
+Uses an separate website for flags images  https://flagcdn.com/
+I've have rendered country flag images for the countries available on TheMealDB.com using their API data.
+

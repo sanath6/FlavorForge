@@ -5,6 +5,7 @@ import Home from "./Pages/Home";
 import RecipeDetails from "./Pages/RecipeDetails";
 import Favorites from "./Pages/Favorites";
 import Navbar from "./Components/Navbar";
+import CountryRecipes from "./Pages/CountrywiseRecipes";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="/recipe/:id" element={<RecipeDetails />} />
 
         <Route path="/favorites" element={<Favorites />} />
+        <Route path="/country/:country" element={<CountryRecipes />} />
 
       </Routes>
 

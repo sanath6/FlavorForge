@@ -4,20 +4,26 @@ import { Link } from "react-router-dom";
 const RecipeCard = ({ meal }) => {
   return (
     <Link to={`/recipe/${meal.idMeal}`}>
-      <div className="bg-white rounded-xl shadow hover:scale-105 transition p-3">
+      <div className="bg-white rounded-xl shadow hover:scale-105 transition overflow-hidden h-[320px] flex flex-col">
+
         <img
           src={meal.strMealThumb}
           alt={meal.strMeal}
-          className="rounded-lg"
+          className="h-48 w-full object-cover"
         />
 
-        <h2 className="text-lg font-bold mt-2">
-          {meal.strMeal}
-        </h2>
+        <div className="p-3 flex flex-col justify-between flex-grow">
 
-        <p className="text-gray-500">
-          {meal.strCategory}
-        </p>
+          <h2 className="text-md font-bold line-clamp-2">
+            {meal.strMeal}
+          </h2>
+
+          <p className="text-gray-500 text-sm mt-1">
+            {meal.strCategory}
+          </p>
+
+        </div>
+
       </div>
     </Link>
   );
