@@ -9,68 +9,69 @@ const Home = () => {
   const [randomMeals, setRandomMeals] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  // fetch random meals on load
+  // Fetch random meals on page load
   useEffect(() => {
     fetchRandomMeals();
   }, []);
 
   const fetchRandomMeals = async () => {
-
     try {
 
-      const requests = [];
-
-      for (let i = 0; i < 16; i++) {
-        requests.push(
-          fetch("https://www.themealdb.com/api/json/v1/1/random.php")
-        );
-      }
+      const requests = Array.from({ length: 16 }, () =>
+        fetch("https://www.themealdb.com/api/json/v1/1/random.php")
+      );
 
       const responses = await Promise.all(requests);
 
       const data = await Promise.all(
-        responses.map(res => res.json())
+        responses.map((res) => res.json())
       );
 
-      const meals = data.map(item => item.meals[0]);
+      const meals = data.map((item) => item.meals[0]);
 
       setRandomMeals(meals);
 
     } catch (error) {
       console.log(error);
     }
-
   };
 
-  const handleSearch = async (e) => {
+  // Debounced search
+  useEffect(() => {
 
-    const value = e.target.value;
-    setQuery(value);
+    const delay = setTimeout(async () => {
 
-    if (!value) {
-      setMeals([]);
-      return;
-    }
+      if (!query) {
+        setMeals([]);
+        return;
+      }
 
-    setLoading(true);
+      setLoading(true);
 
-    const data = await searchMeals(value);
+      const data = await searchMeals(query);
 
-    setMeals(data || []);
-    setLoading(false);
-  };
+      setMeals(data || []);
+
+      setLoading(false);
+
+    }, 500);
+
+    return () => clearTimeout(delay);
+
+  }, [query]);
 
   return (
     <div className="p-6">
 
+      {/* Search Input */}
       <p className="font-semibold mb-2">Search</p>
 
       <input
         type="text"
-        placeholder="Search meals..."
+        placeholder="Search by id, name or ingredient..."
         className="border p-2 w-full mb-6 rounded"
         value={query}
-        onChange={handleSearch}
+        onChange={(e) => setQuery(e.target.value)}
       />
 
       {loading && <p>Loading...</p>}
@@ -78,9 +79,15 @@ const Home = () => {
       {/* Search Results */}
       {query && (
         <div className="grid md:grid-cols-6 gap-6">
-          {meals?.map((meal) => (
-            <RecipeCard key={meal.idMeal} meal={meal} />
-          ))}
+
+          {meals?.length > 0 ? (
+            meals.map((meal) => (
+              <RecipeCard key={meal.idMeal} meal={meal} />
+            ))
+          ) : (
+            <p>No recipes found</p>
+          )}
+
         </div>
       )}
 
