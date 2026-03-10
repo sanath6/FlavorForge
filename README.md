@@ -99,3 +99,95 @@ Implmented a some userexperience features
 Uses an separate website for flags images  https://flagcdn.com/
 I've have rendered country flag images for the countries available on TheMealDB.com using their API data.
 
+## Implemented Elastic search property in search 
+user can search by id/name/categroy/ingredians it will sow according it
+
+
+## elastic search another way like creating another comapnent
+
+
+import React, { useState } from "react";
+import {
+  getMealById,
+  searchMealByName,
+  searchMealByIngredient
+} from "../Services/api";
+
+const RecipeSearch = () => {
+
+  const [search, setSearch] = useState("");
+  const [meals, setMeals] = useState([]);
+
+  const handleSearch = async () => {
+
+    let data = [];
+
+    if (!search) return;
+
+    if (!isNaN(search)) {
+      data = await getMealById(search);
+    } else {
+      
+      data = await searchMealByName(search);
+
+      if (!data || data.length === 0) {
+        data = await searchMealByIngredient(search);
+      }
+    }
+
+    setMeals(data);
+  };
+
+  return (
+    <div className="p-6">
+
+      <input
+        type="text"
+        placeholder="Search recipe..."
+        value={search}
+        onChange={(e) => setSearch(e.target.value)}
+        className="border p-2 mr-2"
+      />
+
+      <button
+        onClick={handleSearch}
+        className="bg-blue-500 text-white px-4 py-2 rounded"
+      >
+        Search
+      </button>
+
+      <div className="grid grid-cols-3 gap-4 mt-6">
+
+        {meals?.map((meal) => (
+          <div key={meal.idMeal} className="border p-3 rounded">
+
+            <img
+              src={meal.strMealThumb}
+              alt={meal.strMeal}
+              className="rounded"
+            />
+
+            <h3 className="font-bold mt-2">
+              {meal.strMeal}
+            </h3>
+
+          </div>
+        ))}
+
+      </div>
+
+    </div>
+  );
+};
+
+export default RecipeSearch;
+
+## Details of item---Recipe Deatils.jsx
+when the user click an item it render the Food steps and recipe and instructions and iamge of item and u ahve choice to add to favourite section at top .It shows of measurements and ingredients.
+
+## Features --- Added/Embeded Youtube video for eachrecipe of an item for reference
+## Improve UI the RecipeDetails page
+in this i have added some new scrollable effect and you see the ingredians in lesss pace to avoid memory space consumption and u can see added the favoute of item
+
+## Added Animation effect to Favouirte button 
+It shows animation effect and it shows an millisecound messege whether it is removed or added to favourites section

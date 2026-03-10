@@ -50,9 +50,9 @@ const CountrySearch = () => {
           setSearch(e.target.value);
           setShowDropdown(true);
         }}
-        // onFocus={() => setShowDropdown(true)}
+        onFocus={() => setShowDropdown(true)}
   onMouseEnter={() => setShowDropdown(true)}
-      onMouseLeave={() => setShowDropdown(false)}
+      // onMouseLeave={() => setShowDropdown(false)}
 
         className="px-3 py-1 rounded text-black"
       />
