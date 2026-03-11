@@ -13,10 +13,10 @@ const CountrySearch = () => {
   }, []);
 
   useEffect(() => {
-  const handleClickOutside = () => setShowDropdown(false);
-  document.addEventListener("click", handleClickOutside);
-  return () => document.removeEventListener("click", handleClickOutside);
-}, []);
+    const handleClickOutside = () => setShowDropdown(false);
+    document.addEventListener("click", handleClickOutside);
+    return () => document.removeEventListener("click", handleClickOutside);
+  }, []);
 
   const fetchCountries = async () => {
 
@@ -29,18 +29,18 @@ const CountrySearch = () => {
   };
 
   const filteredCountries =
-  search === ""
-    ? countries
-    : countries.filter((c) =>
+    search === ""
+      ? countries
+      : countries.filter((c) =>
         c.strArea.toLowerCase().includes(search.toLowerCase())
       );
 
   return (
     <div className="relative"
-    
+
     //   onMouseEnter={() => setShowDropdown(true)}
     //   onMouseLeave={() => setShowDropdown(false)}
->
+    >
 
       <input
         type="text"
@@ -51,13 +51,13 @@ const CountrySearch = () => {
           setShowDropdown(true);
         }}
         onFocus={() => setShowDropdown(true)}
-  onMouseEnter={() => setShowDropdown(true)}
-      // onMouseLeave={() => setShowDropdown(false)}
+        onMouseEnter={() => setShowDropdown(true)}
+        // onMouseLeave={() => setShowDropdown(false)}
 
         className="px-3 py-1 rounded text-black"
       />
 
-      {showDropdown &&  (
+      {showDropdown && (
         <div className="absolute bg-white text-black w-56 mt-2 rounded shadow max-h-64 overflow-y-auto">
 
           {filteredCountries.map((country) => {

@@ -10,11 +10,10 @@ const Navbar = () => {
       <Link to="/" className="flex items-center gap-2 ml-10">
         <FaKitchenSet className="text-4xl text-blue-400" />
         <p className="text-xl font-bold text-green-500">
-          FalourForge
+          FlavorForge
         </p>
       </Link>
 
-      {/* Country Search Component */}
       <CountrySearch />
 
       <div className="flex gap-6">
