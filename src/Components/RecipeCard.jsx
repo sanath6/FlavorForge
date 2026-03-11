@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const RecipeCard = ({ meal }) => {
   return (
     <Link to={`/recipe/${meal.idMeal}`}>
-      <div className="bg-white rounded-xl shadow hover:scale-105 transition overflow-hidden h-[320px] flex flex-col">
+      <div className="bg-white rounded-xl shadow hover:scale-105 transition overflow-hidden h-[300px] flex flex-col">
 
         <img
           src={meal.strMealThumb}

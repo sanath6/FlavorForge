@@ -170,6 +170,7 @@ import React, { useEffect, useState, useRef } from "react";
 import { useParams } from "react-router-dom";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { getMealById } from "../Services/api";
+import BackButton from "../Services/BackButton";
 
 const RecipeDetails = () => {
     const { id } = useParams();
@@ -204,10 +205,10 @@ const RecipeDetails = () => {
         e.stopPropagation();
         const button = e.currentTarget;
         button.style.transform = 'scale(0.9)';
-        
+
         const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
         const exists = favorites.find(item => item.idMeal === meal.idMeal);
-        
+
         if (exists) {
             const updatedFavorites = favorites.filter(item => item.idMeal !== meal.idMeal);
             localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
@@ -219,7 +220,7 @@ const RecipeDetails = () => {
             setIsFavorite(true);
             showMessage("Added to favorites section!");
         }
-        
+
         setTimeout(() => button.style.transform = '', 150);
     };
 
@@ -233,25 +234,27 @@ const RecipeDetails = () => {
             ingredients.push({ name: ingredient, measure: measure });
         }
     }
-    
+
     const youtubeEmbed = meal.strYoutube
         ? meal.strYoutube.replace("watch?v=", "embed/")
         : null;
 
     return (
-        <div className="p-8 max-w-7xl mx-auto relative">
+        <>
+        <BackButton to="/" />
+        <div className="p-4 max-w-7xl mx-auto relative">
             {message && (
-    <div className="fixed top-20 right-4 z-50 bg-white 
+                <div className="fixed top-20 right-4 z-50 bg-white 
     text-black px-6 py-3 rounded-xl shadow-2xl transition-all duration-300 scale-100 
     border-4 border-gray-200">
-        <span className="font-semibold">{message}</span>
-    </div>
-)}
+                    <span className="font-semibold">{message}</span>
+                </div>
+            )}
 
-            
+
             <h1 className="text-3xl font-bold mb-2">{meal.strMeal}</h1>
             <p className="text-gray-500 mb-8">{meal.strCategory} • {meal.strArea}</p>
-            
+
             <h2 className="text-2xl font-bold mb-6">Ingredients</h2>
             <div className="grid md:grid-cols-2 gap-10 items-start">
                 <div className="h-[500px] overflow-y-auto pr-2">
@@ -277,25 +280,25 @@ const RecipeDetails = () => {
                         className="w-full h-full object-cover rounded-lg shadow-lg"
                     />
                     <button
-    onClick={toggleFavorite}
-    className="absolute top-6 right-6 w-10 h-10 bg-white/90 backdrop-blur-sm 
+                        onClick={toggleFavorite}
+                        className="absolute top-6 right-6 w-10 h-10 bg-white/90 backdrop-blur-sm 
      rounded-full  active:animate-ping
     transition-all duration-300 active:scale-95 hover:scale-105 flex items-center justify-center z-20
     group hover:shadow-red-500/25"
-    title={isFavorite ? "Removed from favorites " : "Added to favorites "}
->
-    {isFavorite ? (
-        <FaHeart 
-            className="text-2xl scale-100 transition-all duration-300"
-            style={{ color: '#dc2626' }} // Perfect red heart
-        />
-    ) : (
-        <FaRegHeart 
-            className="text-2xl scale-100 transition-all duration-300"
-            style={{ color: '#9ca3af' }} // Perfect gray outline
-        />
-    )}
-</button>
+                        title={isFavorite ? "Removed from favorites " : "Added to favorites "}
+                    >
+                        {isFavorite ? (
+                            <FaHeart
+                                className="text-2xl scale-100 transition-all duration-300"
+                                style={{ color: '#dc2626' }} // Perfect red heart
+                            />
+                        ) : (
+                            <FaRegHeart
+                                className="text-2xl scale-100 transition-all duration-300"
+                                style={{ color: '#9ca3af' }} // Perfect gray outline
+                            />
+                        )}
+                    </button>
 
                 </div>
             </div>
@@ -323,6 +326,7 @@ const RecipeDetails = () => {
                 </>
             )}
         </div>
+        </>
     );
 };
 

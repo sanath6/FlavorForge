@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import RecipeCard from "../Components/RecipeCard";
+import BackButton from "../Services/BackButton";
 
 const CountryRecipes = () => {
 
@@ -23,21 +24,24 @@ const CountryRecipes = () => {
   };
 
   return (
-    <div className="p-6">
+    <>
+      <BackButton to="/" />
+      <div className="p-6">
 
-      <h1 className="text-2xl font-bold mb-6">
-        {country} Recipes
-      </h1>
+        <h1 className="text-2xl font-bold mb-6">
+          {country} Recipes
+        </h1>
 
-      <div className="grid md:grid-cols-3 gap-6">
+        <div className="grid md:grid-cols-4 gap-6">
 
-        {meals.map((meal) => (
-          <RecipeCard key={meal.idMeal} meal={meal} />
-        ))}
+          {meals.map((meal) => (
+            <RecipeCard key={meal.idMeal} meal={meal} />
+          ))}
+
+        </div>
 
       </div>
-
-    </div>
+    </>
   );
 };
 
